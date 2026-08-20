@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { projects } from './projectData';
 
 function ProjectListPage() {
     return (
@@ -12,6 +13,16 @@ function ProjectListPage() {
                 <Link to="/suggestions">Suggestions</Link>
             </nav>
             <p>Here are some of the projects you can build with the ideas generated from the generator.</p>
+            <div id="project-list-container">
+                {projects.map((project) => (
+                    <div className="project-card" key={project.name}>
+                        <h3>{project.name}</h3>
+                        <p>{project.description}</p>
+                        <p><strong>Difficulty:</strong> {project.difficulty}</p>
+                        <p><strong>Technologies:</strong> {project.technologies}</p>
+                    </div>
+                ))}
+            </div>
         </section>
     )
 }
