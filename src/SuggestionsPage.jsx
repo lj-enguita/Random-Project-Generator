@@ -7,11 +7,13 @@ function SuggestionsPage({ addProject }) {
     const [description, setDescription] = useState('');
     const [difficulty, setDifficulty] = useState('Easy');
     const [technologies, setTechnologies] = useState('');
-    const [submitted, setSubmitted] = useState('');
+    const [submitted, setSubmitted] = useState(false);
+    const [emoji, setEmoji] = useState("🚀");
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const newProject = {
+            emoji: emoji,
             name: name,
             description: description,
             difficulty: difficulty,
@@ -22,7 +24,9 @@ function SuggestionsPage({ addProject }) {
         setDescription('');
         setDifficulty('Easy');
         setTechnologies('');
+        setEmoji("🚀");
         setSubmitted(true);
+        
     };
 
     return (
@@ -38,6 +42,28 @@ function SuggestionsPage({ addProject }) {
                 </nav>
                 {!submitted ? (
                     <form id="suggestion-form" onSubmit={handleSubmit}>
+                        <div className="emoji-preview"> {emoji}</div>
+                        <div>
+                            <label htmlFor="project-emoji">Icon:
+                            </label>
+                            <select id="project-emoji" value={emoji} onChange={(event)=>
+                                setEmoji(event.target.value)
+                    
+                            }>
+                                <option value="🚀">🚀 Rocket</option>
+                                <option value="🎮">🎮 Game</option>
+                                <option value="🤖">🤖 Robot</option>
+                                <option value="📱">📱 Mobile App</option>
+                                <option value="💻">💻 Software</option>
+                                <option value="🎵">🎵 Music</option>
+                                <option value="🌱">🌱 Nature</option>
+                                <option value="📚">📚 Learning</option>
+                                <option value="🦖">🦖 Dinosaur</option>
+                                <option value="🐱">🐱 Animal</option>
+                                <option value="👽">👽 Sci-Fi</option>
+                                <option value="🎨">🎨 Creative</option>
+                            </select>
+                        </div>
 
                         <div>
                             <label htmlFor="project-name">Project Name:</label>

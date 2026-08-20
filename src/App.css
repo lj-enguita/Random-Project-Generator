@@ -165,7 +165,7 @@ nav a:hover {
 
   margin: 2rem auto;
 
-  padding: 3rem;
+  padding: 1rem;
 
   border-radius: 20px;
 
@@ -173,6 +173,10 @@ nav a:hover {
 
   box-shadow:
     0 15px 40px rgba(0, 0, 0, 0.3);
+}
+#project-logo {
+  font-size:4rem;
+  margin-top: rem;
 }
 
 #idea-display h4 {
@@ -184,6 +188,67 @@ nav a:hover {
 #idea-display p {
   font-size: 1rem;
   margin-bottom: 1rem;
+}
+
+/* First project spins into view */
+
+.spin-in {
+  animation: spinIn 0.7s ease-out;
+}
+
+@keyframes spinIn {
+  from {
+    opacity: 0;
+    transform: rotateY(180deg) scale(0.7);
+  }
+
+  to {
+    opacity: 1;
+    transform: rotateY(0deg) scale(1);
+  }
+}
+
+/* Current project fades away */
+
+.fade-out {
+  animation: fadeOut 0.4s ease forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+/* New project fades into view */
+
+.fade-in {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stops repeated clicks during an animation */
+
+#generate-button:disa*led {
+  cursor: not-allowed;
+  opa*ity: 0.7;
 }
 
 /* ===== PROJECT LIST ===== */
@@ -226,6 +291,24 @@ nav a:hover {
 .project-card p {
   color: #cbd5e1;
 }
+.filter-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1 rem;
+  margin: 2rem 0;
+  cursor: pointer;
+}
+.filter-container label {
+  margin: 0;
+  padding: 10px;
+  font-weight: 600;
+}
+.filter-container select {
+  width: auto;
+  min-width: 160px;
+  cursor: pointer;
+}
 
 /* ===== FORM ===== */
 
@@ -241,6 +324,12 @@ nav a:hover {
 label {
   display: block;
   margin-bottom: 0.5rem;
+}
+
+.emoji-preview {
+  text-align: center;
+  font-size: 4rem;
+  margin-bottom: 1rem;
 }
 
 input,
