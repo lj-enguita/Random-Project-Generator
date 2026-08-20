@@ -35,19 +35,11 @@ html {
 body {
   display: flex;
   flex-direction: column;
-  background:
-    radial-gradient(circle at top,
-      #1b2350 0%,
-      #0b1020 50%);
+  background: radial-gradient(circle at top, #1b2350 0%, #0b1020 50%);
 
   color: var(--text);
 
-  font-family:
-    "Segoe UI",
-    Tahoma,
-    Geneva,
-    Verdana,
-    sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 
   min-height: 100vh;
   display: flex;

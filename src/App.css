@@ -27,8 +27,6 @@ section {
 /* ===== HOME PAGE ===== */
 
 #main {
-  min-height: 55vh;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -58,14 +56,46 @@ footer {
   border-top: 1px solid var(--border);
   color: var(--muted);
 }
+#showcase {
+  width: 100%;
+  overflow: hidden;
+  margin: 1rem 0;
+}
 
+.project-track {
+  display: flex;
+  gap: 0.5rem;
+  width: max-content;
+  animation: scroll 60s linear infinite;
+}
 
+.showcase-card {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 220px;
+  background: #1e293b;
+  color: white;
+  text-align: center;
+
+  padding: 1rem 1rem;
+  border-radius: 12px;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
 /* ===== BUTTONS ===== */
 
 button {
-  background: linear-gradient(135deg,
-      #8b5cf6,
-      #06b6d4);
+  background: linear-gradient(135deg, #8b5cf6, #06b6d4);
 
   border: none;
   border-radius: 12px;
@@ -84,8 +114,7 @@ button {
 button:hover {
   transform: translateY(-3px);
 
-  box-shadow:
-    0 12px 25px rgba(139, 92, 246, 0.4);
+  box-shadow: 0 12px 25px rgba(139, 92, 246, 0.4);
 }
 
 /* ===== NAVIGATION ===== */
@@ -125,10 +154,11 @@ nav a:hover {
 
   max-width: 800px;
 
+  max-height: 500px;
+
   margin-top: 2rem;
 
-  box-shadow:
-    0 15px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 
 #inspiration h2 {
@@ -171,11 +201,10 @@ nav a:hover {
 
   background-color: #1e293b;
 
-  box-shadow:
-    0 15px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
 }
 #project-logo {
-  font-size:4rem;
+  font-size: 4rem;
   margin-top: rem;
 }
 
@@ -246,9 +275,9 @@ nav a:hover {
 
 /* Stops repeated clicks during an animation */
 
-#generate-button:disa*led {
+#generate-button:disabled {
   cursor: not-allowed;
-  opa*ity: 0.7;
+  opacity: 0.7;
 }
 
 /* ===== PROJECT LIST ===== */
@@ -276,8 +305,7 @@ nav a:hover {
 
   transition: all 0.2s ease;
 
-  box-shadow:
-    0 8px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .project-card:hover {
@@ -295,7 +323,7 @@ nav a:hover {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: 1 rem;
+  gap: 1rem;
   margin: 2rem 0;
 }
 .filter-container label {
@@ -366,7 +394,7 @@ textarea {
   border: 1px solid var(--border);
   border-radius: 20px;
   border-top: 2px solid #22c55e;
-  box-shadow: 0 10px 30px rgba(0,0,0, .3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 #thank-you-card button {
   margin-top: 1rem;
@@ -390,7 +418,6 @@ textarea {
 /* ===== MOBILE ===== */
 
 @media (max-width: 768px) {
-
   #main h1 {
     font-size: 3rem;
   }
