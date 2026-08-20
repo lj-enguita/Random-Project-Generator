@@ -17,6 +17,8 @@ function App() {
     ]);
   };
   return (
+    <>
+    <main>
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -25,6 +27,11 @@ function App() {
         <Route path="/suggestions" element={<SuggestionsPage addProject={addProject} />} />
       </Routes>
     </Router>
+    </main>
+    <footer>
+      <p>&copy; 2026 Blueprint Builder. All rights reserved.</p>
+    </footer>
+    </>
   );
 }
 

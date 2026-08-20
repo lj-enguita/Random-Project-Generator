@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import './App.css';
 
 const motivations = [
     "Learn new languages",
@@ -17,7 +18,7 @@ function HomePage() {
     useEffect(() => {
         const timer = setInterval(() => {
             setIndex((prev) => (prev + 1) % motivations.length);
-        }, 3000);
+        }, 5000);
 
         return () => clearInterval(timer);
     }, []);
@@ -33,7 +34,7 @@ function HomePage() {
             </section>
 
             <section id="inspiration">
-                <h2>Why Build?</h2>
+                <h2>What motivates you to build?</h2>
                 <p>{motivations[index]}</p>
             </section>
         </>
