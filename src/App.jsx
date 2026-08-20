@@ -23,8 +23,8 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/generator" element={<GeneratorPage projects={projects} />} />
-        <Route path="/projects" element={<ProjectListPage />} />
-        <Route path="/suggestions" element={<SuggestionsPage addProject={addProject} />} />
+        <Route path="/projects" element={<ProjectListPage projects={projects} />} />
+        <Route path="/suggestions" element={<SuggestionsPage addProject={addProject} projects={projects} />} />
       </Routes>
     </Router>
     </main>

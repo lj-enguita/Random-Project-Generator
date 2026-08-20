@@ -3,7 +3,7 @@ import { projects } from "./projectData";
 import { useState } from "react";
 import "./App.css";
 
-function GeneratorPage() {
+function GeneratorPage({projects}) {
     const [project, setProject] = useState(null);
     const [animation, setAnimation] = useState("");
     const [isAnimating, setIsAnimating] = useState(false);

@@ -1,24 +1,53 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import './App.css';
+import { projects } from './projectData';
 
-function SuggestionsPage({ addProject }) {
+function SuggestionsPage({ addProject, projects }) {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [difficulty, setDifficulty] = useState('Easy');
     const [technologies, setTechnologies] = useState('');
     const [submitted, setSubmitted] = useState(false);
     const [emoji, setEmoji] = useState("🚀");
+    const [error, setError] = useState("");
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const newProject = {
-            emoji: emoji,
-            name: name,
-            description: description,
-            difficulty: difficulty,
-            technologies: technologies
+        
+        setError("");
+
+        if(name.trim().length <5) {
+            setError("Project name must be at least 5 characters.");
+            return;
+        }
+
+        if(description.trim().length < 20){
+            setError("Description must be at least 20 characters.");
+            return;
+        }
+
+        if (technologies.trim().length < 3) {
+            setError("Please enter at least one technology.")
+            return;
         };
+
+        const newProject = {
+            emoji,
+            name: name.trim(),
+            description: description.trim(),
+            difficulty: difficulty,
+            technologies: technologies.trim()
+        };
+
+        const projectExists = projects.some((project) =>
+        project.name.toLowerCase() ===
+        name.toLowerCase()
+    );
+        if (projectExists){
+            setError("That project already exists.")
+            return;
+        }
         addProject(newProject);
         setName('');
         setDescription('');
@@ -42,6 +71,7 @@ function SuggestionsPage({ addProject }) {
                 </nav>
                 {!submitted ? (
                     <form id="suggestion-form" onSubmit={handleSubmit}>
+
                         <div className="emoji-preview"> {emoji}</div>
                         <div>
                             <label htmlFor="project-emoji">Icon:
@@ -108,6 +138,10 @@ function SuggestionsPage({ addProject }) {
                                 onChange={(event) => setTechnologies(event.target.value)}
                             />
                         </div>
+                        
+                        {error && (
+                            <p className='error-message'>{error}</p>
+                        )}
 
                         <button type="submit">
                             Submit Suggestion

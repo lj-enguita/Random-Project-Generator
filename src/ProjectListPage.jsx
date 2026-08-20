@@ -3,7 +3,7 @@ import { projects } from './projectData';
 import './App.css';
 import { useState } from 'react';
 
-function ProjectListPage() {
+function ProjectListPage({ projects }) {
     const [filter, seeFilter] = useState("All");
 
     const filteredProjects = 
