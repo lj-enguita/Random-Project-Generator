@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
 import './App.css';
-import { projects as startProjects } from './projectData';
+import { projects as startingProjects } from './projectData';
 import HomePage from './HomePage';
 import GeneratorPage from './GeneratorPage';
 import ProjectListPage from './ProjectListPage';
@@ -21,7 +22,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/generator" element={<GeneratorPage projects={projects} />} />
         <Route path="/projects" element={<ProjectListPage />} />
-        <Route path="/suggestions" element={<SuggestionsPage addProjects={addProject} />} />
+        <Route path="/suggestions" element={<SuggestionsPage addProject={addProject} />} />
       </Routes>
     </Router>
   );

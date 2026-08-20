@@ -4,7 +4,8 @@ import { projects } from './projectData';
 function ProjectListPage() {
     return (
         <section id="project-list">
-            <h2>Project List</h2>
+            <h2>Blueprint Builder</h2>
+            <h3>Project List</h3>
             <nav>
                 <Link to="/generator">Generator</Link>
                 {" | "}
