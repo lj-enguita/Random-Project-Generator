@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import { projects as startingProjects } from "./projectData";
 import HomePage from "./HomePage";
@@ -8,7 +8,14 @@ import ProjectListPage from "./ProjectListPage";
 import SuggestionsPage from "./SuggestionsPage";
 
 function App() {
-  const [projects, setProjects] = useState(startingProjects);
+  const [projects, setProjects] = useState(() => {
+    const savedProjects = localStorage.getItem("projects");
+    return savedProjects ? JSON.parse(savedProjects) : startingProjects;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("projects", JSON.stringify(projects));
+  }, [projects]);
 
   const addProject = (newProject) => {
     setProjects((currentProjects) => [...currentProjects, newProject]);
