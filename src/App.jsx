@@ -31,6 +31,22 @@ function App() {
     );
   };
 
+  const [favourites, setFavourites] = useState(() => {
+    const saved = localStorage.getItem("favourites");
+    return saved ? JSON.parse(saved) : [];
+  });
+  useEffect(() => {
+    localStorage.setItem("favourites", JSON.stringify(favourites));
+  }, [favourites]);
+
+  const toggleFavourite = (projectName) => {
+    setFavourites((currentFavourites) =>
+      currentFavourites.includes(projectName)
+        ? currentFavourites.filter((name) => name !== projectName)
+        : [...currentFavourites, projectName],
+    );
+  };
+
   return (
     <>
       <main>
@@ -39,7 +55,13 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route
               path="/generator"
-              element={<GeneratorPage projects={projects} />}
+              element={
+                <GeneratorPage
+                  projects={projects}
+                  favourites={favourites}
+                  toggleFavourite={toggleFavourite}
+                />
+              }
             />
             <Route
               path="/projects"
@@ -47,6 +69,8 @@ function App() {
                 <ProjectListPage
                   projects={projects}
                   deleteProject={deleteProject}
+                  favourites={favourites}
+                  toggleFavourite={toggleFavourite}
                 />
               }
             />

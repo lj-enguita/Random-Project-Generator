@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import "./App.css";
+import FavouriteButton from "./FavouriteButton";
 
-function GeneratorPage({ projects }) {
+function GeneratorPage({ projects, favourites, toggleFavourite }) {
   const [project, setProject] = useState(null);
   const [animation, setAnimation] = useState("");
   const [isAnimating, setIsAnimating] = useState(false);
@@ -84,6 +85,12 @@ function GeneratorPage({ projects }) {
 
         {project && (
           <div id="idea-display" className={animation}>
+            <FavouriteButton
+              isFavourite={favourites.includes(project.name)}
+              onToggle={() => toggleFavourite(project.name)}
+              projectName={project.name}
+            />
+
             <div id="project-logo">{project.emoji}</div>
 
             <h4>{project.name}</h4>

@@ -191,6 +191,7 @@ nav a:hover {
 }
 
 #idea-display {
+  position: relative;
   max-width: 450px;
 
   margin: 2rem auto;
@@ -297,6 +298,7 @@ nav a:hover {
 }
 
 .project-card {
+  position: relative;
   background-color: #1e293b;
 
   padding: 1.5rem;
@@ -310,6 +312,33 @@ nav a:hover {
 
 .project-card:hover {
   transform: translateY(-5px);
+}
+
+.favourite-button {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 1px solid #475569;
+  border-radius: 50%;
+  background: #0f172a;
+  color: #ca8a04;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.favourite-button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 14px rgba(250, 204, 21, 0.25);
+}
+
+.favourite-button.is-favourite {
+  border-color: #facc15;
+  color: #facc15;
 }
 
 .project-card h3 {

@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import "./App.css";
 import { useState } from "react";
+import FavouriteButton from "./FavouriteButton";
 
-function ProjectListPage({ projects, deleteProject }) {
+function ProjectListPage({
+  projects,
+  deleteProject,
+  favourites,
+  toggleFavourite,
+}) {
   const [filter, seeFilter] = useState("All");
 
   const filteredProjects =
@@ -42,6 +48,12 @@ function ProjectListPage({ projects, deleteProject }) {
         <div id="project-list-container">
           {filteredProjects.map((project) => (
             <div className="project-card" key={project.name}>
+              <FavouriteButton
+                isFavourite={favourites.includes(project.name)}
+                onToggle={() => toggleFavourite(project.name)}
+                projectName={project.name}
+              />
+
               <h3 id="project-list-title">
                 <span className="project-icon">{project.emoji}</span>
                 {project.name}
