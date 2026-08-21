@@ -14,15 +14,18 @@ function GeneratorPage({ projects, favourites, toggleFavourite }) {
 
   const showProject = () => {
     if (isAnimating) {
-      console.info("Generator click ignored while animation is running.");
+      console.info("Generator click ignored: animation is still running.");
       return;
     }
 
     const selectedProject = getRandomProject();
-    console.info("Generator selected project:", selectedProject.name);
+    console.info("Generator selected project:", {
+      name: selectedProject.name,
+      difficulty: selectedProject.difficulty,
+    });
     setIsAnimating(true);
 
-    // First project spins into view
+    // The first result uses a spin; later results fade out and back in.
     if (!project) {
       setProject(selectedProject);
       setAnimation("spin-in");

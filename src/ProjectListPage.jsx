@@ -16,8 +16,6 @@ function ProjectListPage({
       ? projects
       : projects.filter((project) => project.difficulty === filter);
 
-  console.log(projects);
-
   return (
     <>
       <section id="project-list">
@@ -38,7 +36,11 @@ function ProjectListPage({
           <select
             id="difficulty-filter"
             value={filter}
-            onChange={(event) => seeFilter(event.target.value)}
+            onChange={(event) => {
+              const selectedFilter = event.target.value;
+              console.info("Project list filter changed:", selectedFilter);
+              seeFilter(selectedFilter);
+            }}
           >
             <option value="All">All Projects</option>
             <option value="Easy">Easy</option>
@@ -75,7 +77,7 @@ function ProjectListPage({
                   type="button"
                   className="delete-btn"
                   onClick={() => {
-                    console.log("Clicked:", project.name);
+                    console.info("Delete button clicked:", project.name);
                     deleteProject(project.name);
                   }}
                 >

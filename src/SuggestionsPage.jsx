@@ -2,6 +2,19 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import "./App.css";
 
+const hasLetters = (value) => /[A-Za-z]/.test(value);
+
+const hasRepeatedCharacters = (value) =>
+  // Ignore spaces so repeated filler characters are still detected.
+  /(.)\1{3,}/i.test(value.replace(/\s/g, ""));
+
+const isMostlySymbols = (value) => {
+  const compactValue = value.replace(/\s/g, "");
+  const letterCount = (compactValue.match(/[A-Za-z]/g) || []).length;
+
+  return compactValue.length > 0 && letterCount / compactValue.length < 0.5;
+};
+
 function SuggestionsPage({ addProject, projects }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -16,43 +29,95 @@ function SuggestionsPage({ addProject, projects }) {
 
     setError("");
 
-    if (name.trim().length < 5) {
+    const trimmedName = name.trim();
+    const trimmedDescription = description.trim();
+    const trimmedTechnologies = technologies.trim();
+
+    if (trimmedName.length < 5) {
       console.warn("Suggestion rejected: project name is too short.");
       setError("Project name must be at least 5 characters.");
       return;
     }
 
-    if (description.trim().length < 20) {
+    if (!/^[A-Za-z]+(?:[ '-][A-Za-z]+)*$/.test(trimmedName)) {
+      console.warn(
+        "Suggestion rejected: project name contains invalid characters.",
+      );
+      setError(
+        "Project name can only contain letters, spaces, hyphens, or apostrophes.",
+      );
+      return;
+    }
+
+    if (hasRepeatedCharacters(trimmedName)) {
+      console.warn(
+        "Suggestion rejected: project name contains repeated characters.",
+      );
+      setError(
+        "Project name cannot contain four repeated characters in a row.",
+      );
+      return;
+    }
+
+    if (trimmedDescription.length < 20) {
       console.warn("Suggestion rejected: description is too short.");
       setError("Description must be at least 20 characters.");
       return;
     }
 
-    if (technologies.trim().length < 3) {
+    if (
+      !hasLetters(trimmedDescription) ||
+      hasRepeatedCharacters(trimmedDescription) ||
+      isMostlySymbols(trimmedDescription)
+    ) {
+      console.warn("Suggestion rejected: description appears invalid.");
+      setError(
+        "Please enter a meaningful description using words, not random characters.",
+      );
+      return;
+    }
+
+    if (trimmedTechnologies.length < 3) {
       console.warn("Suggestion rejected: technology entry is too short.");
       setError("Please enter at least one technology.");
       return;
     }
 
+    if (
+      !hasLetters(trimmedTechnologies) ||
+      hasRepeatedCharacters(trimmedTechnologies) ||
+      isMostlySymbols(trimmedTechnologies)
+    ) {
+      console.warn("Suggestion rejected: technology entry appears invalid.");
+      setError("Please enter real technology names, not random characters.");
+      return;
+    }
+
     const newProject = {
       emoji,
-      name: name.trim(),
-      description: description.trim(),
+      name: trimmedName,
+      description: trimmedDescription,
       difficulty: difficulty,
-      technologies: technologies.trim(),
+      technologies: trimmedTechnologies,
       userAdded: true,
     };
-    console.log(newProject);
+    console.info("Suggestion details ready for duplicate check:", {
+      name: newProject.name,
+      difficulty: newProject.difficulty,
+      technologies: newProject.technologies,
+    });
 
     const projectExists = projects.some(
       (project) => project.name.toLowerCase() === name.toLowerCase(),
     );
     if (projectExists) {
-      console.warn("Suggestion rejected: project already exists.", name.trim());
+      console.warn("Suggestion rejected: project already exists.", {
+        name: trimmedName,
+      });
       setError("That project already exists.");
       return;
     }
-    console.info("Submitting project suggestion:", newProject);
+    console.info("Submitting project suggestion:", newProject.name);
     addProject(newProject);
     setName("");
     setDescription("");
@@ -99,6 +164,9 @@ function SuggestionsPage({ addProject, projects }) {
                 <option value="🐱">🐱 Animal</option>
                 <option value="👽">👽 Sci-Fi</option>
                 <option value="🎨">🎨 Creative</option>
+                <option value="📷">📷 Camera</option>
+                <option value="📺">📺 Television</option>
+                <option value="🧑‍🤝‍🧑">🧑‍🤝‍🧑 Community</option>
               </select>
             </div>
 
