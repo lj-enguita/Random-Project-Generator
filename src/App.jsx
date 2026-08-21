@@ -18,9 +18,19 @@ function App() {
   }, [projects]);
 
   const addProject = (newProject) => {
+    console.log("Received:", newProject);
+
     setProjects((currentProjects) => [...currentProjects, newProject]);
-    console.info("Project added:", newProject.name);
   };
+
+  const deleteProject = (projectName) => {
+    console.log("Deleting:", projectName);
+
+    setProjects((currentProjects) =>
+      currentProjects.filter((project) => project.name !== projectName),
+    );
+  };
+
   return (
     <>
       <main>
@@ -33,7 +43,12 @@ function App() {
             />
             <Route
               path="/projects"
-              element={<ProjectListPage projects={projects} />}
+              element={
+                <ProjectListPage
+                  projects={projects}
+                  deleteProject={deleteProject}
+                />
+              }
             />
             <Route
               path="/suggestions"

@@ -2,13 +2,15 @@ import { Link } from "react-router-dom";
 import "./App.css";
 import { useState } from "react";
 
-function ProjectListPage({ projects }) {
+function ProjectListPage({ projects, deleteProject }) {
   const [filter, seeFilter] = useState("All");
 
   const filteredProjects =
     filter === "All"
       ? projects
       : projects.filter((project) => project.difficulty === filter);
+
+  console.log(projects);
 
   return (
     <>
@@ -51,6 +53,19 @@ function ProjectListPage({ projects }) {
               <p>
                 <strong>Technologies:</strong> {project.technologies}
               </p>
+
+              {project.userAdded && (
+                <button
+                  type="button"
+                  className="delete-btn"
+                  onClick={() => {
+                    console.log("Clicked:", project.name);
+                    deleteProject(project.name);
+                  }}
+                >
+                  🗑 Delete
+                </button>
+              )}
             </div>
           ))}
         </div>

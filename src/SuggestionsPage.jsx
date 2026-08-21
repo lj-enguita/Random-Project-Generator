@@ -40,7 +40,9 @@ function SuggestionsPage({ addProject, projects }) {
       description: description.trim(),
       difficulty: difficulty,
       technologies: technologies.trim(),
+      userAdded: true,
     };
+    console.log(newProject);
 
     const projectExists = projects.some(
       (project) => project.name.toLowerCase() === name.toLowerCase(),
