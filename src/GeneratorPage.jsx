@@ -63,6 +63,7 @@ function GeneratorPage({ projects, favourites, toggleFavourite }) {
           <Link to="/generator">Generator</Link>
           <Link to="/projects">Project List</Link>
           <Link to="/suggestions">Suggestions</Link>
+          <Link to="/favourites">Favourites</Link>
         </nav>
 
         {!project && (

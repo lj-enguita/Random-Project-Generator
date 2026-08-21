@@ -75,6 +75,7 @@ function SuggestionsPage({ addProject, projects }) {
           <Link to="/generator">Generator</Link>
           <Link to="/projects">Project List</Link>
           <Link to="/suggestions">Suggestions</Link>
+          <Link to="/favourites">Favourites</Link>
         </nav>
         {!submitted ? (
           <form id="suggestion-form" onSubmit={handleSubmit}>

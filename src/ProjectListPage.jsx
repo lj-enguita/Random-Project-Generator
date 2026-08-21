@@ -31,6 +31,7 @@ function ProjectListPage({
           <Link to="/generator">Generator</Link>
           <Link to="/projects">Project List</Link>
           <Link to="/suggestions">Suggestions</Link>
+          <Link to="/favourites">Favourites</Link>
         </nav>
         <div className="filter-container">
           <label htmlFor="difficulty-filter">Filter by Difficulty:</label>
@@ -47,7 +48,10 @@ function ProjectListPage({
         </div>
         <div id="project-list-container">
           {filteredProjects.map((project) => (
-            <div className="project-card" key={project.name}>
+            <div
+              className={`project-card${favourites.includes(project.name) ? " is-favourite" : ""}`}
+              key={project.name}
+            >
               <FavouriteButton
                 isFavourite={favourites.includes(project.name)}
                 onToggle={() => toggleFavourite(project.name)}

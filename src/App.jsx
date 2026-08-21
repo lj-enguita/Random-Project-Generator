@@ -6,6 +6,7 @@ import HomePage from "./HomePage";
 import GeneratorPage from "./GeneratorPage";
 import ProjectListPage from "./ProjectListPage";
 import SuggestionsPage from "./SuggestionsPage";
+import FavouritesPage from "./Favourites";
 
 function App() {
   const [projects, setProjects] = useState(() => {
@@ -47,6 +48,10 @@ function App() {
     );
   };
 
+  const clearFavourites = () => {
+    setFavourites([]);
+  };
+
   return (
     <>
       <main>
@@ -78,6 +83,17 @@ function App() {
               path="/suggestions"
               element={
                 <SuggestionsPage addProject={addProject} projects={projects} />
+              }
+            />
+            <Route
+              path="/favourites"
+              element={
+                <FavouritesPage
+                  favourites={favourites}
+                  projects={projects}
+                  toggleFavourite={toggleFavourite}
+                  clearFavourites={clearFavourites}
+                />
               }
             />
           </Routes>
